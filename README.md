@@ -6,6 +6,21 @@
 
 * [protobufのboolはどこまでcompatibleなのか - 逆さまにした](http://cipepser.hatenablog.com/entry/protobuf-bool)
 
+※`user/`や`UserWrite.go`、`UserRead.go`は上記記事参照。
+
+## enum
+
+TODO: ブログにまとめる
+
+※`max/`や`EnumWrite.go`、`EnumRead.go`は上記記事参照。
+
+
+## 64-bit -> 32-bitの変換
+
+TODO： ブログにまとめる
+
+※フォルダやファイルは`max`でつけているもの
+
 
 ## References
 * [Proto3 Language Guide（和訳）](https://qiita.com/CyLomw/items/9aa4551bd6bb9c0818b6)
