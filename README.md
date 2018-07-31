@@ -180,6 +180,48 @@ utf8(この文字範囲ならASCIIと同じだけど)として読むと`41 6c 69
 :wq
 ```
 
+## Rustでprotobufを試す
+
+[RustでProtocol Buffers - ザネリは列車を見送った ブログという名の備忘録](https://www.zaneli.com/blog/20161217)を参考に試してみる。
+
+
+### インストール
+
+```sh
+❯ cargo install protobuf
+    Updating registry `https://github.com/rust-lang/crates.io-index`
+ Downloading protobuf v2.0.4
+  Installing protobuf v2.0.4
+error: specified package has no binaries
+```
+
+このエラーは無視してよいのだろうか。
+
+## protocする
+
+うまくいかない。
+
+```sh
+❯ protoc --rust_out src/ user.proto
+protoc-gen-rust: program not found or is not executable
+--rust_out: protoc-gen-rust: Plugin failed with status code 1
+```
+
+`protoc-gen-rust`がないようなのでインストールする。
+
+```sh
+❯ cargo install protobuf-codegen
+```
+
+この状態で`protoc`したらうまくいった(`src/user.rs`がgenerateされる)。
+
+
+
+
+
+
+
+
 ## References
 * [Proto3 Language Guide（和訳）](https://qiita.com/CyLomw/items/9aa4551bd6bb9c0818b6)
 * [Protocol Buffers - Encoding](https://developers.google.com/protocol-buffers/docs/encoding)
@@ -188,3 +230,4 @@ utf8(この文字範囲ならASCIIと同じだけど)として読むと`41 6c 69
 * [Protocol Buffers - Language Guide (proto3)](https://developers.google.com/protocol-buffers/docs/proto3)
 * [Protocol Buffers - Google's data interchange format](https://github.com/google/protobuf)
 * [protobufのboolはどこまでcompatibleなのか - 逆さまにした](http://cipepser.hatenablog.com/entry/protobuf-bool)
+* [RustでProtocol Buffers - ザネリは列車を見送った ブログという名の備忘録](https://www.zaneli.com/blog/20161217)
