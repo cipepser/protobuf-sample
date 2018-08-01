@@ -27,4 +27,5 @@ func read(file string) error {
 	}
 	fmt.Printf("0d%d\n0b%b\n", user.Id, user.Id)
 	return nil
+
 }
