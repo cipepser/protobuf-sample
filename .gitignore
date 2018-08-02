@@ -2,3 +2,5 @@
 tmp/
 .tags*
 .idea/
+target/
+Cargo.lock
