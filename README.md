@@ -197,6 +197,9 @@ error: specified package has no binaries
 
 このエラーは無視してよいのだろうか。
 
+[Error installing a crate via cargo: specified package has no binaries](https://stackoverflow.com/questions/37706999/error-installing-a-crate-via-cargo-specified-package-has-no-binaries)を見ると、`cargo install protobuf`せずに`Cargo.toml`に記載しておけばよさそう。
+
+
 ## protocする
 
 うまくいかない。
