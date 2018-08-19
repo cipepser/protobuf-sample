@@ -219,12 +219,6 @@ protoc-gen-rust: program not found or is not executable
 この状態で`protoc`したらうまくいった(`src/user.rs`がgenerateされる)。
 
 
-
-
-
-
-
-
 ## References
 * [Proto3 Language Guide（和訳）](https://qiita.com/CyLomw/items/9aa4551bd6bb9c0818b6)
 * [Protocol Buffers - Encoding](https://developers.google.com/protocol-buffers/docs/encoding)
