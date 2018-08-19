@@ -1,0 +1,14 @@
+syntax = "proto3";
+package blank;
+
+message User {
+  int32 id = 1;
+  string name = 2;
+  fixed64 age = 3;
+  Contact contact = 4;
+}
+
+message Contact {
+  string phone = 1;
+  string email = 2;
+}
