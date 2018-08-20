@@ -1,0 +1,6 @@
+syntax = "proto3";
+package fixed;
+
+message User {
+  sfixed64 id = 1;
+}
