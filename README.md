@@ -182,42 +182,9 @@ utf8(この文字範囲ならASCIIと同じだけど)として読むと`41 6c 69
 
 ## Rustでprotobufを試す
 
-[RustでProtocol Buffers - ザネリは列車を見送った ブログという名の備忘録](https://www.zaneli.com/blog/20161217)を参考に試してみる。
+以下にブログでまとめた。
 
-
-### インストール
-
-```sh
-❯ cargo install protobuf
-    Updating registry `https://github.com/rust-lang/crates.io-index`
- Downloading protobuf v2.0.4
-  Installing protobuf v2.0.4
-error: specified package has no binaries
-```
-
-このエラーは無視してよいのだろうか。
-
-[Error installing a crate via cargo: specified package has no binaries](https://stackoverflow.com/questions/37706999/error-installing-a-crate-via-cargo-specified-package-has-no-binaries)を見ると、`cargo install protobuf`せずに`Cargo.toml`に記載しておけばよさそう。
-
-
-## protocする
-
-うまくいかない。
-
-```sh
-❯ protoc --rust_out src/ user.proto
-protoc-gen-rust: program not found or is not executable
---rust_out: protoc-gen-rust: Plugin failed with status code 1
-```
-
-`protoc-gen-rust`がないようなのでインストールする。
-
-```sh
-❯ cargo install protobuf-codegen
-```
-
-この状態で`protoc`したらうまくいった(`src/user.rs`がgenerateされる)。
-
+[Golangで出力したprotobufバイナリをRustで読み込む - 逆さまにした](https://cipepser.hatenablog.com/entry/protobuf-read-in-rust)
 
 ## References
 * [Proto3 Language Guide（和訳）](https://qiita.com/CyLomw/items/9aa4551bd6bb9c0818b6)
