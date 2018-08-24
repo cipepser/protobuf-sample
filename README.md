@@ -213,6 +213,25 @@ user := &pb.User{
 
 0a09 0a05 416c 6963 6510 14
 
+
+0x0a: 0d10 = 1 * 8 + 2
+> key = タグナンバー * 8 + タイプ値
+
+type2: Length-delimited
+string, bytes, embedded messages, packed repeated fields
+
+これが`09`バイト分 = `0a05 416c 6963 6510 14`。
+
+また0aなので、Length-delimitedで`05`バイト
+
+`41 6c 69 63 65`は`Alice`
+
+残るは`10 14`
+
+0x10: 0d16 = 2 * 8 + 0
+
+なので、タグ番号2の`Varint`として`0x14` = `0b20`を読む
+
 ## References
 * [Proto3 Language Guide（和訳）](https://qiita.com/CyLomw/items/9aa4551bd6bb9c0818b6)
 * [Protocol Buffers - Encoding](https://developers.google.com/protocol-buffers/docs/encoding)
