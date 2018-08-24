@@ -222,7 +222,7 @@ string, bytes, embedded messages, packed repeated fields
 
 これが`09`バイト分 = `0a05 416c 6963 6510 14`。
 
-また0aなので、Length-delimitedで`05`バイト
+また`0a`なので、Length-delimitedで`05`バイト
 
 `41 6c 69 63 65`は`Alice`
 
@@ -231,6 +231,38 @@ string, bytes, embedded messages, packed repeated fields
 0x10: 0d16 = 2 * 8 + 0
 
 なので、タグ番号2の`Varint`として`0x14` = `0b20`を読む
+
+### mapに複数入っている場合は？
+
+Bobを追加する。
+
+```go
+m := map[string]int32{}
+m["Alice"] = 20
+m["Bob"] = 25
+user := &pb.User{
+  Name2Age: m,
+}
+```
+
+結果
+
+0a09 0a05 416c 6963 6510 140a 070a 0342 6f62 1019
+
+先程の結果と並べてみる。
+
+0a09 0a05 416c 6963 6510 14
+
+`0a 070a 0342 6f62 1019`がうしろに増えている。
+
+先程と同じように読むと
+
+`0a`(タグ番号1のLength-delimited)で`07`バイト
+
+`0a`(タグ番号1のLength-delimited)で`03`バイト = `42 6f62`(Bob)
+
+`10`(タグ番号2のVarint)で`0x19` = `0d25`
+
 
 ## References
 * [Proto3 Language Guide（和訳）](https://qiita.com/CyLomw/items/9aa4551bd6bb9c0818b6)
