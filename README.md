@@ -186,6 +186,33 @@ utf8(この文字範囲ならASCIIと同じだけど)として読むと`41 6c 69
 
 [Golangで出力したprotobufバイナリをRustで読み込む - 逆さまにした](https://cipepser.hatenablog.com/entry/protobuf-read-in-rust)
 
+## mapのバイナリを読む
+
+`map.proto`を以下のように定義。
+
+```proto
+syntax = "proto3";
+package map;
+
+message User {
+  map<string, int32> Name2Age = 1;
+}
+```
+
+以下をバイナリで書き込む。
+
+```go
+m := map[string]int32{}
+m["Alice"] = 20
+user := &pb.User{
+  Name2Age: m,
+}
+```
+
+結果
+
+0a09 0a05 416c 6963 6510 14
+
 ## References
 * [Proto3 Language Guide（和訳）](https://qiita.com/CyLomw/items/9aa4551bd6bb9c0818b6)
 * [Protocol Buffers - Encoding](https://developers.google.com/protocol-buffers/docs/encoding)
