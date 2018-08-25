@@ -330,6 +330,23 @@ user := &pb.User{
 
 `42 6f 62`は`Bob`
 
+### mapと比較
+
+#### `Alice`のみ
+
+| synta | binary |
+| ------ | ------ |
+|  map | 0a09 0a05 416c 6963 6510 14 |
+|  repeated | 0a05 416c 6963 65 |
+
+
+#### `Alice`と`Bob`
+
+| synta | binary |
+| ------ | ------ |
+|  map | 0a09 0a05 416c 6963 6510 140a 070a 0342 6f62 1019 |
+|  repeated | 0a05 416c 6963 650a 0342 6f62 |
+
 
 ## References
 * [Proto3 Language Guide（和訳）](https://qiita.com/CyLomw/items/9aa4551bd6bb9c0818b6)
