@@ -1,0 +1,6 @@
+syntax = "proto3";
+package repeated;
+
+message User {
+  repeated string Name = 1;
+}

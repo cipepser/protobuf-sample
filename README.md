@@ -274,6 +274,62 @@ user := &pb.User{
 
 `10`(タグ番号2のVarint)で`0x19` = `0d25`
 
+## repeatedのバイナリを読む
+
+`repeated.proto`を以下のように定義する。
+
+```proto
+syntax = "proto3";
+package repeated;
+
+message User {
+  repeated string Name = 1;
+}
+```
+
+以下を読み込む。
+
+```go
+user := &pb.User{
+  Name: []string{"Alice"},
+}
+```
+
+※ここで`string`をsliceにしないと以下のようにコンパイルが通らない。
+
+```sh
+./RepeatedWrite.go:13:9: cannot use "Alice" (type string) as type []string in field value
+```
+
+さて、出力のバイナリは以下のようになった。
+
+0a05 416c 6963 65
+
+`0a`(タグ番号1のLength-delimited)で`05`バイト
+
+`41 6c 69 63 65`は`Alice`
+
+
+### `Bob`を追加
+
+```go
+user := &pb.User{
+  Name: []string{"Alice", "Bob"},
+}
+```
+
+読み込み結果。
+
+0a05 416c 6963 650a 0342 6f62
+
+`0a`(タグ番号1のLength-delimited)で`05`バイト
+
+`41 6c 69 63 65`は`Alice`
+
+`0a`(タグ番号1のLength-delimited)で`03`バイト
+
+`42 6f 62`は`Bob`
+
 
 ## References
 * [Proto3 Language Guide（和訳）](https://qiita.com/CyLomw/items/9aa4551bd6bb9c0818b6)
