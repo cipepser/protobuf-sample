@@ -232,6 +232,17 @@ string, bytes, embedded messages, packed repeated fields
 
 なので、タグ番号2の`Varint`として`0x14` = `0b20`を読む
 
+`key`がタグ番号1、`value`がタグ番号2であることについては、[Protocol Buffers - Language Guide (proto3)](https://developers.google.com/protocol-buffers/docs/proto3)の`Backwards compatibility`にmapが以下と同一であることが書かれている。
+
+```proto
+message MapFieldEntry {
+  key_type key = 1;
+  value_type value = 2;
+}
+
+repeated MapFieldEntry map_field = N;
+```
+
 ### mapに複数入っている場合は？
 
 Bobを追加する。
