@@ -11,11 +11,12 @@ import (
 func main() {
 	m := map[string]int32{}
 	m["Alice"] = 20
+	m["Bob"] = 25
 	user := &pb.User{
 		Name2Age: m,
 	}
 
-	if err := write("./map/01.bin", user); err != nil {
+	if err := write("./map/02.bin", user); err != nil {
 		log.Fatal(err)
 	}
 }
