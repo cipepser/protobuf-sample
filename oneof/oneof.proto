@@ -1,0 +1,9 @@
+syntax = "proto3";
+package oneof;
+
+message User {
+  oneof Result {
+    string Ok = 1;
+    string Err = 2;
+  }
+}
