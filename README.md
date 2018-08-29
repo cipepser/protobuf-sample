@@ -347,6 +347,45 @@ user := &pb.User{
 |  map | 0a09 0a05 416c 6963 6510 140a 070a 0342 6f62 1019 |
 |  repeated | 0a05 416c 6963 650a 0342 6f62 |
 
+## oneofのバイナリを読む
+
+```proto
+syntax = "proto3";
+package oneof;
+
+message User {
+  oneof Result {
+    string Ok = 1;
+    string Err = 2;
+  }
+}
+```
+
+```go
+user := &pb.User{
+  Result: &pb.User_Ok{Ok: "Alice"},
+}
+```
+
+0a05 416c 6963 65
+
+`0a`(タグ番号1のLength-delimited)で`05`バイト
+
+`41 6c 69 63 65`は`Alice`
+
+```go
+user := &pb.User{
+  Result: &pb.User_Err{Err: "Alice"},
+}
+```
+
+1205 416c 6963 65
+
+`0x12` = `0d18(=2*8+2)`(タグ番号2のLength-delimited)で`05`バイト
+
+`41 6c 69 63 65`は`Alice`
+
+
 
 ## References
 * [Proto3 Language Guide（和訳）](https://qiita.com/CyLomw/items/9aa4551bd6bb9c0818b6)
