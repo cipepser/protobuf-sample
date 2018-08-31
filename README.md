@@ -361,17 +361,23 @@ message User {
 }
 ```
 
+以下(`Ok`)で書き出す。
+
 ```go
 user := &pb.User{
   Result: &pb.User_Ok{Ok: "Alice"},
 }
 ```
 
+結果。
+
 0a05 416c 6963 65
 
 `0a`(タグ番号1のLength-delimited)で`05`バイト
 
 `41 6c 69 63 65`は`Alice`
+
+`Err`でも見てみる。
 
 ```go
 user := &pb.User{
@@ -386,6 +392,7 @@ user := &pb.User{
 `41 6c 69 63 65`は`Alice`
 
 
+最初(`0a`->`12`)が違うだけ。
 
 ## References
 * [Proto3 Language Guide（和訳）](https://qiita.com/CyLomw/items/9aa4551bd6bb9c0818b6)
