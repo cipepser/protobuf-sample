@@ -394,6 +394,34 @@ user := &pb.User{
 
 最初(`0a`->`12`)が違うだけ。
 
+## enumのreseavedについて
+
+まずはenumではなく、単純に`message`でreservedしたフィールドを使おうとすると怒られることを確認する。
+
+```proto
+syntax = "proto3";
+package reserved;
+
+message User {
+  reserved 1;
+  enum Type {
+    NORMAL = 0;
+    PREMIUM = 1;
+  }
+  bool type = 1;
+}
+```
+
+上記でタグ`1`を予約した上で、`bool type = 1;`で使おうとした状況で`protoc`してみる。
+
+```sh
+❯ protoc -I=reserved/ --go_out=reserved/ reserved.proto
+reserved.proto: Field "type" uses reserved number 1.
+```
+
+確かに怒られる。
+
+
 ## References
 * [Proto3 Language Guide（和訳）](https://qiita.com/CyLomw/items/9aa4551bd6bb9c0818b6)
 * [Protocol Buffers - Encoding](https://developers.google.com/protocol-buffers/docs/encoding)
