@@ -1,0 +1,11 @@
+syntax = "proto3";
+package reserved;
+
+message User {
+  enum Type {
+    reserved 0, 1;
+    NORMAL = 0;
+    PREMIUM = 1;
+  }
+  bool type = 1;
+}

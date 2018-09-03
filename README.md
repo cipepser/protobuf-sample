@@ -421,6 +421,42 @@ reserved.proto: Field "type" uses reserved number 1.
 
 確かに怒られる。
 
+### enumでreservedしたい
+
+[are reserved available in ENUMS? #3458](https://github.com/protocolbuffers/protobuf/issues/3458)に以下のように書かれている。
+
+> You can't use reserved in enums at the moment. The support was already added in our internal code base though. It missed the integration for 3.4.0 release but should be able to make its way into 3.5.0 release.
+
+`3.5.0`以降なら使えるみたい。
+
+```sh
+❯ protoc --version
+libprotoc 3.6.0
+```
+
+以下の`.proto`で`protoc`してみる。
+
+```proto
+syntax = "proto3";
+package reserved;
+
+message User {
+  enum Type {
+    reserved 0, 1;
+    NORMAL = 0;
+    PREMIUM = 1;
+  }
+  bool type = 1;
+}
+```
+
+以下のように怒られる。
+
+```sh
+❯ protoc -I=reserved/ --go_out=reserved/ enum.proto
+enum.proto: Enum value "NORMAL" uses reserved number 0.
+enum.proto: Enum value "PREMIUM" uses reserved number 1.
+```
 
 ## References
 * [Proto3 Language Guide（和訳）](https://qiita.com/CyLomw/items/9aa4551bd6bb9c0818b6)
@@ -431,3 +467,4 @@ reserved.proto: Field "type" uses reserved number 1.
 * [Protocol Buffers - Google's data interchange format](https://github.com/google/protobuf)
 * [protobufのboolはどこまでcompatibleなのか - 逆さまにした](http://cipepser.hatenablog.com/entry/protobuf-bool)
 * [RustでProtocol Buffers - ザネリは列車を見送った ブログという名の備忘録](https://www.zaneli.com/blog/20161217)
+* [are reserved available in ENUMS? #3458](https://github.com/protocolbuffers/protobuf/issues/3458)
